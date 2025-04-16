@@ -1,0 +1,50 @@
+/* ../../../../../../tmp/tmp-472936-6Ve0CHr9uAmk/lms_addon/lms_addon/public/home.bundle.css */
+section {
+  position: relative;
+  z-index: 9;
+}
+.countries-map {
+  position: relative;
+  z-index: 9;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.countries-map .countries-list > li {
+  transition: all 0.3s ease;
+}
+.countries-map .countries-list > li.highlighted,
+.countries-map .countries-list > li:hover {
+  background: orange !important;
+}
+.countries-map .map-container {
+  width: 100%;
+  overflow-y: clip;
+}
+.countries-map .map-container .map-wrapper {
+  padding-top: 4rem;
+  position: relative;
+}
+.countries-map .map-container .map-wrapper > svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.countries-map .map-container .map-wrapper .connector-line {
+  color: #ff6347;
+  stroke: #ff6347;
+}
+.countries-map .map-container .map-wrapper .region {
+  outline: 0;
+  fill: transparent;
+  stroke: #3f3d56;
+  transition: all 0.3s ease-in-out;
+}
+.countries-map .map-container .map-wrapper .region.selected {
+  fill: #66cbea;
+  cursor: pointer;
+}
+.countries-map .map-container .map-wrapper .region.highlighted,
+.countries-map .map-container .map-wrapper .region:hover {
+  fill: #3f3d56;
+}
+/*# sourceMappingURL=home.bundle.BPOAMHKX.css.map */

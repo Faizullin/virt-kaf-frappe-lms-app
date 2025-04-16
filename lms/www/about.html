@@ -1,0 +1,174 @@
+<!--
+
+{% block page_content %}
+
+<article class="about-content">
+	{{ web_block(
+		'Hero',
+		values={
+			"title": doc.page_title or _("About Us"),
+			"subtitle": doc.company_introduction or default_intro
+		},
+		add_container=0,
+		add_top_padding=1,
+		add_bottom_padding=1,
+	) }}
+
+
+	{% if doc.get({"doctype":"Company History"}) %}
+	<section class="section section-padding-bottom">
+		<h2>{{ doc.company_history_heading or _("Company History") }}</h2>
+		{% for d in doc.get({"doctype":"Company History"}) %}
+		<div class="row">
+			<span class="col-md-2">
+				<h5>{{ d.year }}</h5>
+			</span>
+			<span class="col-md-8">
+				<p>{{ d.highlight }}</p>
+			</span>
+		</div>
+		{% endfor %}
+	</section>
+	{% endif %}
+
+	{% if doc.get({"doctype":"About Us Team Member"}) %}
+	<section class="section section-padding-bottom">
+		<h2>{{ doc.team_members_heading or _("Team Members") }}</h2>
+		<p>{{ doc.team_members_subtitle }}</p>
+		<div class="row">
+			{% for d in doc.get({"doctype":"About Us Team Member"}) %}
+			<div class="col-md-2 mt-4" itemscope itemtype="http://schema.org/Person">
+				<img class="card card-md w-100" src="{{ d.image_link }}" itemprop="image">
+				<h5 class="mt-3" itemprop="name">{{ d.full_name }}</h5>
+				<p class="small mt-2" itemprop="description">{{ d.bio }}</p>
+			</div>
+			{% endfor %}
+		</div>
+	</section>
+	{% endif %}
+{% endblock %} -->
+
+
+{% extends "/templates/lms_addon_base.html" %}
+
+{% set default_intro = """<p>Some Introduction about your company that you would
+	like your website visitor to know.
+	More people than you think will read your About page.
+	People always like to know who the are doing business with.
+	Be authentic and avoid using jargon like 'value added services' etc.
+	Be sure to update your company history and
+	list of key team members in Website > About Us Settings</p>""" %}
+
+{% set title = doc.page_title or _("About Us") %}
+
+{% block content %}
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-xs-12"
+                     data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                    <h1>Learn. Grow. <em>Thrive.</em></h1>
+                    <p>At Virt Kaf, we're building a smarter tomorrow by making education more accessible, interactive, and globally connected.</p>
+                    <a href="#about" class="main-button-slider">Discover Our Story</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<!-- ***** About Us Start ***** -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="center-heading">
+            <h2>About <em>Virt Kaf</em></h2>
+            <p>We believe education is the spark that fuels a better future. Virt Kaf is where curiosity meets opportunity.</p>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-6" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                <h4>Our History</h4>
+                <p>Virt Kaf was founded in 2024 by a passionate group of educators, developers, and dreamers who envisioned a world where quality learning is not bound by geography or cost. Starting with a handful of video lessons, we've grown into a global platform trusted by thousands of learners across 50+ countries.</p>
+                <p>From our humble beginnings in a co-working space to building one of the most dynamic online learning ecosystems, our journey has been driven by a single mission: to empower every learner to achieve their full potential.</p>
+            </div>
+            <div class="col-lg-6" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                <img src="/assets/lms_addon/m/assets/images/about-icon-01.png" class="img-fluid rounded" alt="Our story">
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-6" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                <img src="/assets/lms_addon/m/assets/images/about-icon-02.png" class="img-fluid rounded" alt="Mission & Vision">
+            </div>
+            <div class="col-lg-6" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                <h4>Our Mission & Vision</h4>
+                <p><strong>Mission:</strong> To deliver inclusive, engaging, and skill-driven education that transforms lives through technology.</p>
+                <p><strong>Vision:</strong> A world where every learner—regardless of location or background—has the tools to grow, achieve, and contribute to a better future.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** About Us End ***** -->
+
+<!-- ***** Our Core Features Start ***** -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="center-heading">
+            <h2>What Makes <em>Virt Kaf</em> Different</h2>
+            <p>We're more than just another learning platform. We're a community. A mission. A movement.</p>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="features-item">
+                    <div class="features-icon">
+                        <h2>01</h2>
+                        <img src="/assets/lms_addon/m/assets/images/features-icon-1.png" alt="">
+                        <h4>Engaging Content</h4>
+                        <p>Our lessons are crafted with interactivity and impact in mind — designed to keep you curious and connected.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="features-item">
+                    <div class="features-icon">
+                        <h2>02</h2>
+                        <img src="/assets/lms_addon/m/assets/images/features-icon-2.png" alt="">
+                        <h4>Expert Instructors</h4>
+                        <p>Learn from professionals and educators who are leaders in their fields, always ready to guide and inspire.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="features-item">
+                    <div class="features-icon">
+                        <h2>03</h2>
+                        <img src="/assets/lms_addon/m/assets/images/features-icon-3.png" alt="">
+                        <h4>Student-Centered Tools</h4>
+                        <p>From smart dashboards to personalized feedback, we make learning easier, faster, and more rewarding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Our Core Features End ***** -->
+
+<!-- ***** Call to Action ***** -->
+<section class="section bg-light section-spaced " id="cta">
+    <div class="container text-center">
+        <h2>Start Your Learning Journey Today</h2>
+        <p>Join Virt Kaf and become part of a learning revolution. It’s free to get started.</p>
+		<div class="mb-5"></div>
+        <a href="/signup" class="main-button">Join Virt Kaf community</a>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "templates/includes/footer/lms_addon_contact_form_footer.html" %}
+{% endblock %}

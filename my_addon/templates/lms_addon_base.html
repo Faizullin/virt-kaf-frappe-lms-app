@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Virtual Kaf.{% endblock %}</title>
+
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="/assets/lms_addon/m/assets/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="/assets/lms_addon/m/assets/css/font-awesome.css">
+        <link rel="stylesheet"
+            href="/assets/lms_addon/m/assets/css/templatemo-lava.css">
+        <link rel="stylesheet"
+            href="/assets/lms_addon/m/assets/css/owl-carousel.css">
+
+        {% block favicon %}
+        <link
+            rel="shortcut icon"
+            href="{{ (favicon or "/assets/frappe/images/frappe-favicon.svg") | abs_url }}"
+            type="image/x-icon"
+        >
+        {% endblock %}
+
+        {% block head_extra %}{% endblock %}
+    </head>
+
+    <script>
+    window.frappe = {};
+    window._version_number = "{{ build_version }}";
+    frappe.ready_events = [];
+    frappe.ready = function (fn) {
+        frappe.ready_events.push(fn);
+    }
+    window.dev_server = Number("{{ dev_server }}");
+    window.socketio_port = Number("{{ (frappe.socketio_port or 9000) }}");
+    window.show_language_picker = Number("{{ show_language_picker }}");
+
+
+    window.my_data = {
+        pathname: "{{ pathname }}",
+    }
+</script>
+
+    <body
+        frappe-session-status="{{ 'logged-in' if frappe.session.user != 'Guest' else 'logged-out'}}"
+        data-path="{{ path | e }}">
+
+        <!-- Header -->
+        {% block header %}
+        <!-- ***** Preloader Start ***** -->
+        <div id="preloader">
+            <div class="jumper">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <!-- ***** Preloader End ***** -->
+
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="/" class="logo">
+                                Virt Kaf
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a
+                                        href="/#welcome" class="menu-item"
+                                        data-url-name="index">Home</a></li>
+                                <li class="scroll-to-section"><a href="/about"
+                                        class="menu-item"
+                                        data-url-name="about">About</a></li>
+                                <!-- <li class="submenu">
+                                <a href="javascript:;">Drop Down</a>
+                                <ul>
+                                    <li><a href="" class="menu-item">About Us</a></li>
+                                    <li><a href="" class="menu-item">Features</a></li>
+                                    <li><a href="" class="menu-item">FAQ's</a></li>
+                                </ul>
+                            </li> -->
+                                <li><a href="/articles" class="menu-item"
+                                        data-url-name="articles">Article</a></li>
+                                <li class="scroll-to-section"><a
+                                        href="#contact-us"
+                                        class="menu-item">Contact Us</a></li>
+
+                                {% if frappe.session.user == 'Guest' %}
+                                <li class>
+                                    <a href="/login">Sign In</a>
+                                </li>
+                                {% else %}
+                                <li class="submenu">
+                                    <a href="javascript:;">
+                                        {{ frappe.session.user }}
+                                    </a>
+                                    <ul>
+                                        <li><a href="/profile"
+                                                class="menu-item">Profile</a></li>
+                                        <li>
+                                            <a href="/logout">Logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            <a class='menu-trigger'>
+                                <span>Menu</span>
+                            </a>
+                            <a href>
+
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ***** Header Area End ***** -->
+
+        {% endblock %}
+
+        <!-- Main Content -->
+        {% block content %}
+        {% endblock %}
+
+        <!-- Footer -->
+        {% block footer %}
+        {% endblock %}
+
+        <!-- JS Files -->
+        <script
+            src="/assets/lms_addon/m/assets/js/jquery-2.1.0.min.js"></script>
+        <script src="/assets/lms_addon/m/assets/js/popper.js"></script>
+        <script src="/assets/lms_addon/m/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/lms_addon/m/assets/js/owl-carousel.js"></script>
+        <script
+            src="/assets/lms_addon/m/assets/js/scrollreveal.min.js"></script>
+        <script src="/assets/lms_addon/m/assets/js/waypoints.min.js"></script>
+        <script
+            src="/assets/lms_addon/m/assets/js/jquery.counterup.min.js"></script>
+        <script src="/assets/lms_addon/m/assets/js/imgfix.min.js"></script>
+        <script src="/assets/lms_addon/m/assets/js/custom.js"></script>
+
+        {% block base_scripts %}
+        <!-- js should be loaded in body! -->
+        <script>
+        frappe.boot = JSON.parse(`{{ boot | json }}`);
+        // for backward compatibility of some libs
+        frappe.sys_defaults = frappe.boot.sysdefaults;
+    </script>
+        {{ include_script('frappe-web.bundle.js') }}
+
+        <script>frappe.csrf_token = "{{frappe.session.csrf_token}}";</script>
+        {% endblock %}
+
+        {%- for link in web_include_js %}
+        {{ include_script(link) }}
+        {%- endfor -%}
+
+        {%- block script %}
+        {% if colocated_js -%}
+        <script>{{ colocated_js }}</script>
+        {%- endif %}
+        {%- endblock %}
+        <!-- csrf_token -->
+        {%- block body_include %}{{ body_include or "" }}{% endblock -%}
+
+        {% block scripts %}
+        {% endblock %}
+
+    </body>
+
+</html>

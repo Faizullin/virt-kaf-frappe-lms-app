@@ -1,0 +1,131 @@
+<!-- ***** Footer Start ***** -->
+<footer id="contact-us">
+    <div class="container">
+        <div class="footer-content">
+            <div class="row">
+                <!-- ***** Contact Form Start ***** -->
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <fieldset>
+                                        <input name="subject" type="text" id="subject" placeholder="Subject" required=""
+                                            style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <fieldset>
+                                        <input name="email" type="text" id="email" placeholder="E-Mail Address"
+                                            required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <textarea name="message" rows="6" id="message" placeholder="Your Message"
+                                            required="" style="background-color: rgba(250,250,250,0.3);"></textarea>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="main-button">Send Message
+                                            Now</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- ***** Contact Form End ***** -->
+                <div class="right-content col-lg-6 col-md-12 col-sm-12">
+                    <h2>Get in Touch with <a rel="nofollow" href="/lms" target="_parent"><em>EduLava</em></a></h2>
+                    <p>Whether you're a student, educator, or partner, we'd love to hear from you. Reach out with any
+                        questions or collaboration ideas.</p>
+                    <p> To get started you can view our <a rel="nofollow" href="/lms" target="_parent">dashboard</a>
+                    </p>
+                    <ul class="social">
+                        <li><a href="https://fb.com/templatemo"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-lg-12">
+                <div class="sub-footer">
+                    <p>Copyright &copy; 2020 Lava Landing Page
+
+                        | Designed by <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</footer>
+<script>
+    // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
+    // MIT License. See license.txt
+
+    frappe.ready(function () {
+
+        const formEl = $('form#contact');
+        const submitBtnEl = formEl.find('button[type="submit"]');
+
+        if (frappe.utils.get_url_arg('subject')) {
+            formEl.find('[name = "subject"]').val(frappe.utils.get_url_arg('subject'));
+        }
+       
+        formEl.off("submit").on("submit", function (el) {
+            el.preventDefault();
+            var subject = formEl.find('[name="subject"]').val();
+            var email = formEl.find('[name="email"]').val();
+            var message = formEl.find('[name="message"]').val();
+
+            if (!(email && message)) {
+                frappe.msgprint('{{ _("Please enter both your email and message so that we can get back to you. Thanks!") }}');
+                return false;
+            }
+
+            if (!validate_email(email)) {
+                frappe.msgprint('{{ _("You seem to have written your name instead of your email. Please enter a valid email address so that we can get back.") }}');
+                formEl.find('[name="email"]').focus();
+                return false;
+            }
+
+            
+            submitBtnEl.prop('disabled', true);
+            $("#contact-alert").toggle(false);
+            frappe.call({
+                type: "POST",
+                method: "frappe.www.contact.send_message",
+                headers: {
+                    'X-Frappe-CSRF-Token': frappe.csrftoken
+                },
+                args: {
+                    subject: subject,
+                    sender: email,
+                    message: message,
+                },
+                callback: function (r) {
+                    if (!r.exc) {
+                        frappe.msgprint('{{ _("Thank you for your message") }}', '{{ _("Message Sent") }}');
+                    }
+                    formEl.find(':input').val('');
+                },
+                success: function () {
+                    submitBtnEl.prop('disabled', false);
+                },
+                error: function () {
+                    submitBtnEl.prop('disabled', false);
+                },
+            });
+        });
+    });
+
+    var msgprint = function (txt) {
+        if (txt) $("#contact-alert").html(txt).toggle(true);
+    }
+
+</script>
