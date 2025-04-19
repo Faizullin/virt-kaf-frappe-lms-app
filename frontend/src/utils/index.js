@@ -495,6 +495,14 @@ export function getSidebarLinks() {
 			to: 'Statistics',
 			activeFor: ['Statistics'],
 		},
+		{
+			label: 'Articles',
+			icon: 'BookOpen',
+			to: 'Articles',
+			activeFor: [
+				'ArticleForm',
+			],
+		},
 	]
 }
 

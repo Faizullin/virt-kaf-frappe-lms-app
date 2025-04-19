@@ -1,0 +1,91 @@
+{% extends "/templates/lms_addon_base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<!-- ***** Welcome Area (Custom) ***** -->
+<div class="welcome-area" id="welcome" style="height: auto; min-height:400px;">
+  <div class="header-text">
+    <div class="container">
+      <div class="row"
+        style="background-image: url({{ meta_image }}); background-size: cover; background-position: center;">
+        <div
+          class="left-text col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-xs-12"
+          data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+          <div class="bg-white px-5 py-45 shadow-sm rounded-lg">
+            <h1><em>{{ title }}</em></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ***** End Welcome Area ***** -->
+
+<!--
+  =============================================
+  Display Logic Based on User Authentication
+  =============================================
+-->
+{% if frappe.session.user == "Guest" %}
+<!-- Guest (Unauthenticated) Section -->
+<section class="section" id="blog-intro">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <!-- Article Rich Content -->
+        <div class="article-intro">
+          {{ blog_intro|safe }}
+        </div>
+
+        <div class="card mt-5">
+          <div class="card-body">
+            <h2 class="card-title">
+              <i class="fa fa-lock
+                  text-danger"></i> Restricted Content
+            </h2>
+            <p class="card-text">
+              <strong>Access to this article is restricted.</strong>
+              <br>
+              <br>
+              <a href="/login" class="btn btn-primary">Login to Read</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% else %}
+<!-- Authenticated Section: Show Full Article Content -->
+<section class="section" id="article-detail">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <!-- Article Rich Content -->
+        <div class="article-content">
+          {{ content|safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+<!-- Footer intentionally left empty -->
+{% endblock %}
+
+{% block head_extra %}
+{{ include_style("home.bundle.css") }}
+{% endblock %}
+
+{% block scripts %}
+<!-- You can place your custom scripts here if needed. -->
+{% endblock %}

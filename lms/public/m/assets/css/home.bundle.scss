@@ -1,0 +1,71 @@
+
+
+
+$dot-line-fill-color: #ff6347;
+$region-stroke-color: #3f3d56;
+$region-fill-color: #66cbea;
+$region-hover-color: #3f3d56;
+$default-decor-upper-z-index: 9;
+
+section {
+    position: relative;
+    z-index: $default-decor-upper-z-index;
+}
+
+
+.countries-map {
+    position: relative;
+    z-index: $default-decor-upper-z-index;
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    .countries-list {
+        >li {
+            transition: all .3s ease;
+
+            &.highlighted,
+            &:hover {
+                background: orange !important;
+            }
+        }
+    }
+
+    .map-container {
+        width: 100%;
+
+        overflow-y: clip;
+
+        .map-wrapper {
+            padding-top: 4rem;
+            position: relative;
+
+            &>svg {
+                width: 100%;
+                height: auto;
+                overflow: visible;
+            }
+
+            .connector-line {
+                color: $dot-line-fill-color;
+                stroke: $dot-line-fill-color;
+            }
+
+            .region {
+                outline: 0;
+                fill: transparent;
+                stroke: $region-stroke-color;
+                transition: all .3s ease-in-out;
+
+                &.selected {
+                    fill: $region-fill-color;
+                    cursor: pointer;
+                }
+
+                &.highlighted,
+                &:hover {
+                    fill: $region-hover-color;
+                }
+            }
+        }
+    }
+}

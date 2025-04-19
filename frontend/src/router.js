@@ -216,6 +216,19 @@ const routes = [
 		name: 'AssignmentSubmissionList',
 		component: () => import('@/pages/AssignmentSubmissionList.vue'),
 	},
+
+
+	{
+		path: '/articles',
+		name: 'Articles',
+		component: () => import('@/pages/CArticles.vue'),
+	},
+	{
+		path: '/articles/:articleID/edit',
+		name: 'ArticleForm',
+		component: () => import('@/pages/CArticleForm.vue'),
+		props: true,
+	},
 ]
 
 let router = createRouter({

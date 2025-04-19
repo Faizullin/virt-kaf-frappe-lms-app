@@ -2162,3 +2162,48 @@ def get_palette(full_name):
 	hash_name = hashlib.md5(encoded_name).hexdigest()
 	idx = cint((int(hash_name[4:6], 16) + 1) / 5.33)
 	return palette[idx % 8]
+
+
+@frappe.whitelist(allow_guest=True)
+def get_articles(filters=None, start=0, page_length=20):
+    """Returns the list of articles."""
+    if not filters:
+        filters = {}
+
+    # Apply filters for published articles
+    if filters.get("published"):
+        filters.update({"published": 1})
+        del filters["published"]
+
+    # Apply filters for title search
+    if filters.get("title"):
+        filters.update({"title": ["like", f"%{filters['title']}%"]})
+        del filters["title"]
+
+    # Apply filters for category
+    if filters.get("category"):
+        filters.update({"category": filters["category"]})
+        del filters["category"]
+
+    # Fetch articles
+    articles = frappe.get_all(
+        "CArticle",
+        filters=filters,
+        fields=[
+            "name",
+            "title",
+            "blog_intro",
+            "meta_image",
+            "author",
+            "category",
+            "published",
+            "featured",
+            "is_free",
+            "published_on",
+        ],
+        order_by="published_on desc",
+        start=start,
+        page_length=page_length,
+    )
+
+    return articles

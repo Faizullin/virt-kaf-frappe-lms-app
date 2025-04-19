@@ -38,7 +38,7 @@
                 <div class="features-item">
                     <div class="features-icon">
                         <h2>01</h2>
-                        <img src="/assets/lms_addon/m/assets/images/features-icon-1.png" alt="">
+                        <img src="/assets/lms/m/assets/images/features-icon-1.png" alt="">
                         <h4>Interactive Lessons</h4>
                         <p>Learn through videos, quizzes, coding tasks, and simulations across different subjects and
                             grade levels.</p>
@@ -53,7 +53,7 @@
                 <div class="features-item">
                     <div class="features-icon">
                         <h2>02</h2>
-                        <img src="/assets/lms_addon/m/assets/images/features-icon-2.png" alt="">
+                        <img src="/assets/lms/m/assets/images/features-icon-2.png" alt="">
                         <h4>Global Instructors</h4>
                         <p>Engage with mentors and teachers from top universities and companies around the world.</p>
                         <a href="/lms" class="main-button cursor-pointer">
@@ -67,7 +67,7 @@
                 <div class="features-item">
                     <div class="features-icon">
                         <h2>03</h2>
-                        <img src="/assets/lms_addon/m/assets/images/features-icon-3.png" alt="">
+                        <img src="/assets/lms/m/assets/images/features-icon-3.png" alt="">
 
                         <h4>Personal Dashboard</h4>
                         <p>Track your achievements, manage deadlines, and access resources easily in one central place.
@@ -91,15 +91,15 @@
         <div class="row">
             <div class="left-image col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix-big"
                 data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                <!-- <img src="/assets/lms_addon/m/assets/images/left-image.png" class="rounded img-fluid d-block mx-auto"
+                <!-- <img src="/assets/lms/m/assets/images/left-image.png" class="rounded img-fluid d-block mx-auto"
                     alt="App"> -->
-                <img src="/assets/lms_addon/m/assets/icons/home-global.svg" class="rounded img-fluid d-block mx-auto"
+                <img src="/assets/lms/m/assets/icons/home-global.svg" class="rounded img-fluid d-block mx-auto"
                     alt="App">
             </div>
             <div class="right-text offset-lg-1 col-lg-6 col-md-12 col-sm-12 mobile-bottom-fix">
                 <ul>
                     <li data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
-                        <img src="/assets/lms_addon/m/assets/images/about-icon-01.png" alt="">
+                        <img src="/assets/lms/m/assets/images/about-icon-01.png" alt="">
                         <div class="text">
                             <h4>Personalized Learning Paths</h4>
                             <p>Learn at your own pace with curated courses that align with your personal and academic
@@ -108,7 +108,7 @@
                         </div>
                     </li>
                     <li data-scroll-reveal="enter right move 30px over 0.6s after 0.5s">
-                        <img src="/assets/lms_addon/m/assets/images/about-icon-02.png" alt="">
+                        <img src="/assets/lms/m/assets/images/about-icon-02.png" alt="">
                         <div class="text">
                             <h4>Global Classroom</h4>
                             <p>Connect with peers and instructors from across the globe to share knowledge and
@@ -116,7 +116,7 @@
                         </div>
                     </li>
                     <li data-scroll-reveal="enter right move 30px over 0.6s after 0.6s">
-                        <img src="/assets/lms_addon/m/assets/images/about-icon-03.png" alt="">
+                        <img src="/assets/lms/m/assets/images/about-icon-03.png" alt="">
                         <div class="text">
                             <h4>Skill-Based Curriculum</h4>
                             <p>Master the skills that matter most—whether you're preparing for exams or building a
@@ -180,7 +180,7 @@
                 <div class="owl-carousel owl-theme">
                     <div class="item service-item">
                         <div class="author">
-                            <i><img src="/assets/lms_addon/m/assets/images/testimonial-author-1.png"
+                            <i><img src="/assets/lms/m/assets/images/testimonial-author-1.png"
                                     alt="Author One"></i>
                         </div>
                         <div class="testimonial-content">
@@ -199,7 +199,7 @@
                     </div>
                     <div class="item service-item">
                         <div class="author">
-                            <i><img src="/assets/lms_addon/m/assets/images/testimonial-author-1.png"
+                            <i><img src="/assets/lms/m/assets/images/testimonial-author-1.png"
                                     alt="Second Author"></i>
                         </div>
                         <div class="testimonial-content">
@@ -218,7 +218,7 @@
                     </div>
                     <div class="item service-item">
                         <div class="author">
-                            <i><img src="/assets/lms_addon/m/assets/images/testimonial-author-1.png"
+                            <i><img src="/assets/lms/m/assets/images/testimonial-author-1.png"
                                     alt="Author Third"></i>
                         </div>
                         <div class="testimonial-content">
@@ -247,13 +247,14 @@
 
 {% block head_extra %}
 {{ include_style("home.bundle.css") }}
+<!-- <link rel="stylesheet" href="{{ bundled_asset('home.bundle.css') }}" /> -->
 {% endblock %}
 
 {% block scripts %}
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
     $(function () {
-        const geoUrl = "/assets/lms_addon/m/assets/data/geo.json"; // update if needed
+        const geoUrl = "/assets/lms/m/assets/data/geo.json"; // update if needed
         const svg = d3.select(".countries-svg");
         const width = 800, height = 400;
         const projection = d3.geoMercator().scale(280).translate([width / 2 - 300, height / 2 + 200]);
