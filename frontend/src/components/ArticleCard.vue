@@ -38,7 +38,7 @@
 
             <div class="flex items-center justify-between mt-auto">
                 <div class="flex avatar-group overlap">
-                    <div
+                    <!-- <div
                         class="h-6 mr-1"
                         :class="{ 'avatar-group overlap': article.authors.length > 1 }"
                     >
@@ -46,12 +46,18 @@
                             v-for="author in article.authors"
                             :user="author"
                         />
+                    </div> -->
+                    <!-- use stirng author -->
+                    <div
+                        class="h-6 mr-1"
+                        :class="{ 'avatar-group overlap': !!article.author }">
+                        {{ article.author }}
                     </div>
                     
                 </div>
 
-                <div v-if="article.published_date" class="text-sm text-ink-gray-7">
-                    {{ __('Published on') }} {{ article.published_date }}
+                <div v-if="article.published_on" class="text-sm text-ink-gray-7">
+                    {{ __('Published on') }} {{ article.published_on }}
                 </div>
             </div>
         </div>

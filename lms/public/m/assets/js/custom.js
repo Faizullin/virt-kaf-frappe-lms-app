@@ -61,6 +61,7 @@
 		const currentPathname = window.my_data.pathname;
 		const urls_data = {
 			"index": "/",
+			"index.html": "/",
 			"about": "/about",
 			"articles": "/articles",
 		};
@@ -70,7 +71,7 @@
 			console.warn(`currentPathname ${currentPathname} not found in urls_data.`);
 		} else {
 		}
-
+			
 		$('.menu-item').each(function () {
 			const href = $(this).attr("href");
 			if (!href.startsWith("#") && $(this).data("url-name") === currentPathname) {

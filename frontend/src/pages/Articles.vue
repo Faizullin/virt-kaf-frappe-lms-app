@@ -53,12 +53,20 @@
             v-if="articles.data?.length"
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5"
         >
-            <router-link
+            <!-- <router-link
                 v-for="article in articles.data"
                 :to="{ name: 'ArticleDetail', params: { articleID: article.name } }"
             >
-                <CArticleCard :article="article" />
-            </router-link>
+                <ArticleCard :article="article" />
+            </router-link> -->
+            <a 
+                v-for="article in articles.data"
+                :href="`${article.route}`"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <ArticleCard :article="article" />
+            </a>
         </div>
         <div
             v-else-if="!articles.list.loading"
@@ -99,7 +107,7 @@ import {
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import { BookOpen, Plus } from 'lucide-vue-next'
 import { updateDocumentTitle } from '@/utils'
-import CArticleCard from '@/components/CArticleCard.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 
 const user = inject('$user')
 const dayjs = inject('$dayjs')
@@ -135,17 +143,19 @@ const articles = createListResource({
     pageLength: pageLength.value,
     start: start.value,
     onSuccess(data) {
-        let allCategories = data.map((article) => article.category)
-        allCategories = allCategories.filter(
-            (category, index) => allCategories.indexOf(category) === index && category
-        )
-        if (categories.value.length <= allCategories.length) {
-            updateCategories(data)
-        }
+        console.log("articles.onSuccess", data)
+        // let allCategories = data.map((article) => article.category)
+        // allCategories = allCategories.filter(
+        //     (category, index) => allCategories.indexOf(category) === index && category
+        // )
+        // if (categories.value.length <= allCategories.length) {
+        //     updateCategories(data)
+        // }
     },
 })
 
 const updateArticles = () => {
+    console.log("updateArticles", currentTab.value)
     updateFilters()
     articles.update({
         filters: filters.value,
@@ -220,12 +230,12 @@ const articleTabs = computed(() => {
         {
             label: __('Live'),
         },
-        {
-            label: __('New'),
-        },
-        {
-            label: __('Upcoming'),
-        },
+        // {
+        //     label: __('New'),
+        // },
+        // {
+        //     label: __('Upcoming'),
+        // },
     ]
     if (user.data?.is_moderator) {
         tabs.push({ label: __('Created') })

@@ -221,12 +221,12 @@ const routes = [
 	{
 		path: '/articles',
 		name: 'Articles',
-		component: () => import('@/pages/CArticles.vue'),
+		component: () => import('@/pages/Articles.vue'),
 	},
 	{
 		path: '/articles/:articleID/edit',
 		name: 'ArticleForm',
-		component: () => import('@/pages/CArticleForm.vue'),
+		component: () => import('@/pages/ArticleForm.vue'),
 		props: true,
 	},
 ]

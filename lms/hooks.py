@@ -54,7 +54,7 @@ web_include_js = ["website.bundle.js"]
 # ----------
 
 # automatically create page for each record of this doctype
-# website_generators = ["CArticle"]
+website_generators = ["CArticle"]
 
 # Installation
 # ------------
