@@ -3,6 +3,19 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import frappeui from 'frappe-ui/vite'
 
+const dev = false;
+const server = {
+	allowedHosts: ['fs', 'onb1'],
+}
+if(dev) {
+	server.host = '0.0.0.0'
+	// server.port = 3000
+	server.watch = {
+		usePolling: true,
+	}
+}
+	
+
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
@@ -24,13 +37,13 @@ export default defineConfig({
 			},
 		}),
 	],
-	server: {
-		allowedHosts: ['fs', 'onb1'],
-		host: '0.0.0.0',
-		// port: 3000,
-		watch: {
-			usePolling: true,
-		}
+	server: {...server},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: '@import "@/styles/variables.scss";',
+			},
+		},
 	},
 	resolve: {
 		alias: {
